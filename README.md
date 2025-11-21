@@ -1,69 +1,81 @@
-# Ceaser Cipher in C
 
-This program implements a simple **Ceasar cipher** in C.
-It encrypts and decrypts messages with a fixed shift (currently 3)
-and preserves letter case while ignoring whitespaces.
+# Caesar Cipher Encryption in C
+
+A **C program** that implements a **Caesar cipher** for text encryption and decryption. It supports uppercase and lowercase letters while preserving spaces, and provides a simple example to demonstrate encryption and decryption.
+
+Project repository: [GitHub](https://github.com/Lushomo53/Caesar-Cipher-Encryption-C.git)
+
+---
 
 ## Features
 
-- Encypts andd decrypts text with a fixed shift.
-- Preserves uppercase and lowercase letters.
-- Ignores whitespaces during encryption/decryption.
-- Checks for non-alphabetical characters and exits gracefully with an error message.
-- Demonstrates memory management in c ('malloc' and 'free').
+* Encrypts and decrypts text using a **shift of 3** (classic Caesar cipher).
+* Preserves **letter case** (uppercase/lowercase).
+* Preserves **whitespace** in input text.
+* Validates input to ensure only alphabetical characters are processed.
+* Simple demonstration of **dynamic memory allocation** and **string manipulation** in C.
 
-## File Structure
+---
 
-encryption/          <- Root project folder 
-├── src/                <- Source code folder 
-│   └── main.c          <- Main C program implementing the Caesar cipher 
-├── README.md           <- Project documentation 
-└── .gitignore          <- Git ignore file for compiled/binary files
+## Files
 
+* `main.c` – Contains the implementation of the Caesar cipher and example usage.
 
-## Compilation
+---
 
-Compile the program using `gcc`:
+## Usage
+
+1. **Clone the repository**:
 
 ```bash
-gcc -o cipher src/main.c
+git clone https://github.com/Lushomo53/Caesar-Cipher-Encryption-C.git
 ```
-This will generate an executable called cipher
 
-##Usage
+2. **Compile the program**:
 
-Run the program on a termial: 
+```bash
+gcc main.c -o caesar_cipher
+```
 
-./cipher
+3. **Run the program**:
 
-The program encrypts a predefined message then decrypts it
+```bash
+./caesar_cipher
+```
 
-Example output:
+4. Example output:
 
-Original text: Encryption adds safety to communication
+```
+HQFUBSWLRQ DGGV VDIWHB WR FRPPXQLFDWLRQ, ENCRYPTION ADDS SAFTEY TO COMMUNICATION
+```
 
-Encrypted: Hqfubswlrq dggv vdiwhb wr frppxqlfdwlrq
-Decrypted: Encryption adds safety to communication
+* The first part is the encrypted string.
+* The second part is the decrypted string (matches original input).
 
-## Sample Usage in C
+---
 
-    char text[] = "Encryption adds saftey to communication";
+## How It Works
 
-    char *encstr = cipher(text, ENCRYPT);
-    char *decstr = cipher(encstr, DECRYPT);
+* **`fill_letters()`** – Initializes an array of letters from `A` to `Z`.
+* **`get_pos(char c)`** – Returns the alphabetical index (0–25) of a letter.
+* **`cipher(const char *text, int action)`** – Performs the Caesar cipher:
 
-    printf("%s, %s\n", encstr, decstr);
-    //free allocated memory
-    free(encstr);
-    free(decstr);
+  * `action = 1` → encryption
+  * `action = 0` → decryption
+  * Shifts letters by ±3 positions.
+  * Preserves case and ignores spaces.
+* **Memory management** – Dynamically allocates memory for the result string, which must be freed after use.
+
+---
 
 ## Notes
-- The shift is currently hard-coded to 3, but the code can be modiffied for variable shifts
-- Memory allocated by cipher() must be freed by the caller to avoid memory leaks.
-- Non-alphabetical characters will cause the program to exit with an error.
 
-## License
+* Only **alphabetical characters** are allowed; any non-alphabetic input will terminate the program with an error.
+* The program uses **modular arithmetic** to wrap around the alphabet when shifting.
+* Freeing allocated memory (`free()`) is performed after encryption and decryption to avoid memory leaks.
 
-This project is open-source under the **MIT License**
+---
 
+## Author
 
+**Lushomo Lungo** – Developed as a C learning project implementing classical cryptography.
